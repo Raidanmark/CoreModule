@@ -2,6 +2,7 @@ package org.example.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +12,21 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+
 @Entity
 @Table(name = "ticker")
 public class TickerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+    Long id;
 
     @Column(unique = true)
-    private String name;
-    private String symbol;
+    String name, symbol;
 
     @OneToMany
     @JoinColumn (name = "ticker_id")
-    private List<CandleEntity> candles = new ArrayList<>();
-
+    List<CandleEntity> candles = new ArrayList<>();
 
 }

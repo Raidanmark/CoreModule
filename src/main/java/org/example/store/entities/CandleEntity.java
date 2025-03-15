@@ -2,26 +2,23 @@ package org.example.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+
 @Entity
 @Table(name = "candle")
 public class CandleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+    Long id;
 
-    private double open, close, low, high, vol;
-
-
-
+    double open, close, low, high, vol;
 
 }
 
