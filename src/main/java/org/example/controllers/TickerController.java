@@ -3,6 +3,7 @@ package org.example.controllers;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.example.dto.AnswDto;
 import org.example.dto.TickerDto;
 import org.example.exceptions.BadRequestException;
 import org.example.exceptions.NotFoundException;
@@ -27,8 +28,9 @@ public class TickerController {
     TickerDtoFactory tickerDtoFactory;
 
     public static final  String CREATE_TICKER = "/api/tickers";
-    public static final  String EDIT_TICKER = "/api/tickers/{ticker_id}";
+    public static final  String EDIT_TICKER = "/api/tickers";
     public static final  String FETCH_TICKERS = "/api/tickers";
+    public static final  String DELETE_TICKER = "/api/tickers";
 
 
     @PostMapping(CREATE_TICKER)
@@ -55,9 +57,9 @@ public class TickerController {
           return tickerDtoFactory.makeTickerDto(ticker);
     }
 
-    @PatchMapping(EDIT_TICKER)
+    @PutMapping(EDIT_TICKER)
     public TickerDto editPatch(
-            @PathVariable("ticker_id") String tickerId,
+            @RequestParam("ticker_id") String tickerId,
             @RequestParam String name, @RequestParam String symbol) {
 
         if (name.trim().isEmpty() || symbol.trim().isEmpty()) {
@@ -96,5 +98,19 @@ public class TickerController {
         return tickerRepository.streamAllBy()
                 .map(tickerDtoFactory::makeTickerDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping(DELETE_TICKER)
+    public AnswDto deleteTicker(@RequestParam("ticker_id") String tickerId) {
+        TickerEntity ticker = tickerRepository
+                .findById(Long.valueOf(tickerId))
+                .orElseThrow(() ->
+                        new NotFoundException(String.format(
+                                "Timeframe \" %s\" not found", tickerId))
+                );
+
+        tickerRepository.deleteById(Long.valueOf(tickerId));
+        return AnswDto.makeDefault(true);
+
     }
 }

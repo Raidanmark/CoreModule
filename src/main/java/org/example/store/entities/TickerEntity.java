@@ -26,7 +26,7 @@ public class TickerEntity {
     String name, symbol;
 
     @OneToMany
-    @JoinColumn (name = "ticker_id")
+    @JoinColumn (name = "ticker_name")
     List<CandleEntity> candles = new ArrayList<>();
 
 }

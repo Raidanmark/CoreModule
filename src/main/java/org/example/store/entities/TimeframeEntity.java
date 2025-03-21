@@ -25,7 +25,7 @@ public class TimeframeEntity {
     String code;
 
     @OneToMany
-    @JoinColumn (name = "timeframe_id")
+    @JoinColumn (name = "timeframe_code")
     List<CandleEntity> candles = new ArrayList<>();
 
 }
