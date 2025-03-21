@@ -1,5 +1,6 @@
 package org.example.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,5 +15,10 @@ public class CandleDto {
     Long id;
 
     @NonNull
-    double open, close, low, high, vol;
+    double open, close, low, high, volume;
+
+
+    //@NonNull
+   //String timeframe_code, ticker_name;
+
 }

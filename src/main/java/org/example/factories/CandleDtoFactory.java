@@ -13,7 +13,7 @@ public class CandleDtoFactory {
                 .close(entity.getClose())
                 .low(entity.getLow())
                 .high(entity.getHigh())
-                .vol(entity.getVol())
+                .volume(entity.getVolume())
                 .build();
     }
 }
