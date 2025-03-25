@@ -18,7 +18,6 @@ public class CandleEntity {
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
 
-    @NonNull
     double open, close, low, high, volume;
 
 
